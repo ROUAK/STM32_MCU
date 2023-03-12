@@ -59,8 +59,8 @@ all: main-build
 main-build: hello_world_ITM_SWO.elf secondary-outputs
 
 # Tool invocations
-hello_world_ITM_SWO.elf hello_world_ITM_SWO.map: $(OBJS) $(USER_OBJS) C:\Users\a-rou\Documents\STM32_MCU\target\nucleo-F103RB\hello_world\STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "hello_world_ITM_SWO.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\a-rou\Documents\STM32_MCU\target\nucleo-F103RB\hello_world\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="hello_world_ITM_SWO.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+hello_world_ITM_SWO.elf hello_world_ITM_SWO.map: $(OBJS) $(USER_OBJS) C:\Users\a-rou\Documents\STM32_MCU\target\nucleo-F103RB\hello_world_ITM_SWO\STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "hello_world_ITM_SWO.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\a-rou\Documents\STM32_MCU\target\nucleo-F103RB\hello_world_ITM_SWO\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="hello_world_ITM_SWO.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
