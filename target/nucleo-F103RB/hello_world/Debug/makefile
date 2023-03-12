@@ -33,34 +33,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := hello_world
+BUILD_ARTIFACT_NAME := hello_world_ITM_SWO
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-hello_world.elf \
+hello_world_ITM_SWO.elf \
 
 MAP_FILES += \
-hello_world.map \
+hello_world_ITM_SWO.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-hello_world.list \
+hello_world_ITM_SWO.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: hello_world.elf secondary-outputs
+main-build: hello_world_ITM_SWO.elf secondary-outputs
 
 # Tool invocations
-hello_world.elf hello_world.map: $(OBJS) $(USER_OBJS) C:\Users\a-rou\Documents\STM32_MCU\target\nucleo-F103RB\hello_world\STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "hello_world.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\a-rou\Documents\STM32_MCU\target\nucleo-F103RB\hello_world\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="hello_world.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+hello_world_ITM_SWO.elf hello_world_ITM_SWO.map: $(OBJS) $(USER_OBJS) C:\Users\a-rou\Documents\STM32_MCU\target\nucleo-F103RB\hello_world\STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "hello_world_ITM_SWO.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\a-rou\Documents\STM32_MCU\target\nucleo-F103RB\hello_world\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="hello_world_ITM_SWO.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -69,14 +69,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-hello_world.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "hello_world.list"
+hello_world_ITM_SWO.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "hello_world_ITM_SWO.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) default.size.stdout hello_world.elf hello_world.list hello_world.map
+	-$(RM) default.size.stdout hello_world_ITM_SWO.elf hello_world_ITM_SWO.list hello_world_ITM_SWO.map
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
