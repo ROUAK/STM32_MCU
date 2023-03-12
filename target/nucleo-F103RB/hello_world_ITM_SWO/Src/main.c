@@ -28,6 +28,14 @@ int main(void)
 {
 
 	printf("hello world\n");
+	printf("%u\n", sizeof(char));
+	printf("%u\n", sizeof(short));
+	printf("%u\n", sizeof(int));
+	printf("%u\n", sizeof(long));
+	printf("%u\n", sizeof(long long));
+	printf("%u\n", sizeof(double));
+	printf("%u\n", sizeof(float));
+
     /* Loop forever */
 	for(;;);
 }
