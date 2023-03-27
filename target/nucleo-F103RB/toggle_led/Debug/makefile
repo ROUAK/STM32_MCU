@@ -59,8 +59,8 @@ all: main-build
 main-build: toggle_led.elf secondary-outputs
 
 # Tool invocations
-toggle_led.elf toggle_led.map: $(OBJS) $(USER_OBJS) C:\Users\a-rou\Documents\STM32_MCU\target\nucleo-F103RB\toggle_led\STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "toggle_led.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\a-rou\Documents\STM32_MCU\target\nucleo-F103RB\toggle_led\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="toggle_led.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+toggle_led.elf toggle_led.map: $(OBJS) $(USER_OBJS) C:\GIT\STM32_MCU.git\target\nucleo-F103RB\toggle_led\STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "toggle_led.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\GIT\STM32_MCU.git\target\nucleo-F103RB\toggle_led\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="toggle_led.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

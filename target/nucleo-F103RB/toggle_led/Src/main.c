@@ -18,26 +18,43 @@
 
 #include <stdint.h>
 
-uint32_t* RCC_APB2ENR = (uint32_t*) 0x40021018; //activer clock AP2 for gpioA
-uint32_t* GPIOx_CRL   = (uint32_t*) 0x40010800; //configure le mode du gpio
-uint32_t* GPIOx_ODR   = (uint32_t*) 0x4001080C; //configure la valeur de sortie
-
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
+uint32_t volatile *const RCC_APB2ENR = (uint32_t*) 0x40021018; //activer clock AP2 to use GPIOs
+uint32_t volatile *const GPIOa_CRL   = (uint32_t*) 0x40010800; //configure le mode du gpioA
+uint32_t volatile *const GPIOa_ODR   = (uint32_t*) 0x4001080C; //configure la valeur de sortie du GPIOA
+uint32_t volatile *const GPIOc_CRH   = (uint32_t*) 0x40011004; //configure le mode du gpioC
+uint32_t const volatile *const GPIOc_IDR   = (uint32_t*) 0x40011008; //Port input data register of Gpio C
+
 int main(void)
 {
-	/* enable clock for abp2 bus */
+	/* enable clock for abp2 bus for gpio A and C*/
 	*RCC_APB2ENR |= (1 << 2);
+	*RCC_APB2ENR |= (1 << 4);
 
 	/* configure gpioA output 2Mhz */
-	*GPIOx_CRL |= (2 << 20);
-	*GPIOx_CRL &= ~(1 << 22);
+	*GPIOa_CRL |= (2 << 20);
+	*GPIOa_CRL &= ~(1 << 22);
 
-	/* Write one on pin 5 gpioA */
-	*GPIOx_ODR |= (1 << 5);
+	/* configure gpioC input with pullup pulldown */
+	*GPIOc_CRH &= ~(3 << 20);
+	*GPIOc_CRH |= (1 << 22);
 
     /* Loop forever */
-	for(;;);
+	while(1)
+	{
+		/* Read  PC13 */
+		if(*GPIOc_IDR & (1 << 13))
+		{
+			/* Write zero on pin 5 gpioA */
+			*GPIOa_ODR &= ~(1 << 5);
+		}
+		else
+		{
+			/* Write one on pin 5 gpioA */
+			*GPIOa_ODR |= (1 << 5);
+		}
+	}
 }
